@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://plugin.powerschool.pearson.com"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation='http://plugin.powerschool.pearson.com plugin.xsd'
+        name="Find Me Alert"
+        version="1.1"
+        description="Adds Find Me Alert to each student screen">
+
+  <autoinstall required="true">
+    <autoenable required="true" />
+    <autoredeploy />
+  </autoinstall>
+
+  <publisher name="Computer Logic Group">
+    <contact email="customization@goclg.com" phone="631-738-1900" />
+  </publisher>
+
+</plugin>
+

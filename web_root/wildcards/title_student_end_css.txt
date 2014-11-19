@@ -1,0 +1,4 @@
+~[studentalert]
+<a href="/admin/findmealert.html?frn=~(studentfrn)" class='dialogM' title='Find Me' ><img src="/images/alert_findme.gif" height="24" width="31" alt="Find Me" border="0"></a>
+</h1>
+<p style="background-color:~[if.~(enroll_status)=-1]#00ff00[/if]~[if.~(enroll_status)=1]#ff0000[/if]~[if.~(enroll_status)=2]#99CCFF[/if];">~(studentname) &nbsp; ~([01]grade_level) &nbsp; ~([01]student_number) &nbsp; &nbsp; ~([01]track) &nbsp; &nbsp; ~(studschoolabbr) &nbsp; &nbsp; ~[enrollmentstatus]</p>
