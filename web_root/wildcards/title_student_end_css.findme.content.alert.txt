@@ -1,0 +1,7 @@
+<script type="text/template" id="find-me-template">
+    <a class='dialogM' title='Find Me' href="/admin/findmealert.html?frn=~(studentfrn)">
+        <img src="/images/alert_findmewhite.gif" style="width: 20px;">
+    </a>
+</script>
+
+<script src="/scripts/find-me/admin-findme.js"></script>
