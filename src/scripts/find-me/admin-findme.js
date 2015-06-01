@@ -1,6 +1,6 @@
 /*global $j*/
 $j(document).ready(function () {
     var $findMeTemplate = $j($j('#find-me-template').html());
-    var insertSelector = $j('.cust-content-alert');
+    var insertSelector = $j('#cust-student-alert');
     $findMeTemplate.insertBefore(insertSelector);
 });
