@@ -1,5 +1,5 @@
 <script type="text/javascript">
 	$j(document).ready(function(){
-	    $j('div#content > div#content-main > form > h1').append( '<a class="dialogM" title="Find Me" href="/teachers/findmealert.html?frn=~(studentfrn)"><img src="<!-- @echo IMAGE_SERVER_URL -->/images/find-me/alert_findmewhite.gif" width="20" border="0"></a>');
+	    $j('div#content > div#content-main > form > h1').append( '<a class="dialogM" title="Find Me" href="/teachers/findmealert.html?frn=~(studentfrn)"><img src="<!-- @echo IMAGE_SERVER_URL -->/find-me/img/alert_findmewhite.gif" width="20" border="0"></a>');
 	});
 </script>
