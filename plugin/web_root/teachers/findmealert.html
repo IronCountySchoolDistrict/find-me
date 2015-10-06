@@ -7,7 +7,7 @@
 <td width="100%"><span class="header">Find Me</span><br>Name:&nbsp;~(studentname)<br>Home Room:&nbsp;~(home_room)</td>
 </tr>
 <tr>
-<td colspan="3" background="/images/bullet_repeat.gif"><img src="<!-- @echo IMAGE_SERVER_URL -->/images/transparent.gif" width="4" height="8" alt="" border="0"></td>
+<td colspan="3" background="/images/bullet_repeat.gif"><img src="/images/transparent.gif" width="4" height="8" alt="" border="0"></td>
 </tr>
 <tr>
 <td colspan="3"><img src="/images/misc_trans.gif" width="1" height="8"></td>
@@ -37,7 +37,7 @@ FROM Students s
     AND sm.Year_ID = ~(curyearid)
     AND sm.SchoolID = (SELECT enrollment_schoolid FROM Students WHERE ID = ~(curstudid))
     AND sm.SectionID = cc.SectionID
-  LEFT OUTER JOIN (SELECT Calendar_DayID, PeriodID, attc.Att_Code, attc.Description FROM Attendance att INNER JOIN Attendance_Code attc ON attc.ID=att.Attendance_CodeID WHERE att.SchoolID = (SELECT enrollment_schoolid FROM Students WHERE ID = ~(curstudid)) AND att.Att_Date = trunc(to_date('~[date]','MM/DD/YYYY')) AND StudentID = ~(curstudid)) att 
+  LEFT OUTER JOIN (SELECT Calendar_DayID, PeriodID, attc.Att_Code, attc.Description FROM Attendance att INNER JOIN Attendance_Code attc ON attc.ID=att.Attendance_CodeID WHERE att.SchoolID = (SELECT enrollment_schoolid FROM Students WHERE ID = ~(curstudid)) AND att.Att_Date = trunc(to_date('~[date]','MM/DD/YYYY')) AND StudentID = ~(curstudid)) att
     ON att.Calendar_DayID=cd.ID
     AND att.PeriodID=p.ID
 WHERE bsi.Start_Time<=((substr('~[current.time.no.colon]', 1,2))*3600) + ((substr('~[current.time.no.colon]', 3,2))*60)
@@ -53,11 +53,11 @@ WHERE bsi.Start_Time<=((substr('~[current.time.no.colon]', 1,2))*3600) + ((subst
     [/tlist_sql]
 	<br>
     ~[tlist_sql;
-SELECT 
+SELECT
   'Between periods ' || pc.periodName || ' and ' || nc.periodName Period,
-  pc.Day_Name, 
+  pc.Day_Name,
   'Traveling from ' || sec.Room || ' to ' || sec2.Room Room
-  
+
 FROM (SELECT DISTINCT bsi.Start_Time, bsi.End_Time, p.ID periodID, p.Name periodName, cc.SectionID, CC.ID, cdy.Day_Name
                     FROM Calendar_Day cd
                       INNER JOIN Bell_Schedule bs ON cd.Bell_Schedule_ID=bs.ID
@@ -89,7 +89,7 @@ FROM (SELECT DISTINCT bsi.Start_Time, bsi.End_Time, p.ID periodID, p.Name period
                         AND sm.Cycle_Day_Letter = cdy.Letter
                         AND sm.Year_ID = ~(curyearid)
                         AND sm.SchoolID = cd.SchoolID
-                        AND sm.SectionID = cc.SectionID) nc, Sections sec2 
+                        AND sm.SectionID = cc.SectionID) nc, Sections sec2
 WHERE pc.SectionID = sec.ID
   AND nc.SectionID = sec2.ID
   AND pc.Start_Time = (SELECT MAX(START_TIME) FROM (SELECT DISTINCT bsi.Start_Time, bsi.End_Time
@@ -130,26 +130,26 @@ AND pc.start_time != nc.start_time]
     ~[text]psx.html.admin_mobile.findmeiui.room1,param:~(rooms;t)[/text]<br />
     ~[text]psx.html.admin_mobile.findmeiui.current_time1,param:~[time][/text]<br />
     [/tlist_sql]
-	
+
     ~[tlist_sql;
-SELECT 
-  CASE 
+SELECT
+  CASE
     WHEN NOT((SELECT enroll_status FROM Students WHERE ID = ~(curstudid)) = 0) THEN 'This student is not active and doesn''t have a schedule'
-    WHEN SE.schoolStart >((substr('~[current.time.no.colon]', 1,2))*3600) + ((substr('~[current.time.no.colon]', 3,2))*60) THEN 'School has not started yet' 
+    WHEN SE.schoolStart >((substr('~[current.time.no.colon]', 1,2))*3600) + ((substr('~[current.time.no.colon]', 3,2))*60) THEN 'School has not started yet'
     WHEN SE.schoolEnd < ((substr('~[current.time.no.colon]', 1,2))*3600) + ((substr('~[current.time.no.colon]', 3,2))*60) THEN 'The school day has ended for this student'
     WHEN SE.schoolStart is null THEN 'School is not in session today'
   END message,
-  cdy.day_name, 
+  cdy.day_name,
   s.First_Name,
   SE.schoolStart,
   SE.schoolEnd
-FROM Students s 
+FROM Students s
   INNER JOIN Calendar_Day cd ON s.Enrollment_SchoolID = cd.SchoolID
     AND s.ID = ~(curstudid)
   LEFT OUTER JOIN Cycle_Day cdy ON Cycle_Day_ID=cdy.ID,
   (SELECT MIN(bsi.Start_Time) schoolStart, MAX(bsi.End_Time) schoolEnd
-		FROM Bell_Schedule_Items bsi 
-		  INNER JOIN Bell_Schedule bs ON bs.ID=bsi.Bell_Schedule_ID 
+		FROM Bell_Schedule_Items bsi
+		  INNER JOIN Bell_Schedule bs ON bs.ID=bsi.Bell_Schedule_ID
 		  INNER JOIN Calendar_Day cd ON cd.Bell_Schedule_ID=bs.ID AND cd.date_value=trunc(to_date('~[date]','MM/DD/YYYY')) AND cd.SchoolID=(SELECT enrollment_schoolid FROM Students WHERE ID = ~(curstudid))
 		  INNER JOIN Cycle_Day cdy ON cdy.ID=cd.Cycle_Day_ID
 		  INNER JOIN Period p ON p.ID=bsi.Period_ID
