@@ -1,6 +1,8 @@
-/*global $j*/
-$j(document).ready(function () {
-    var $findMeTemplate = $j($j('#find-me-template').html());
-    var insertSelector = $j('#cust-student-alert');
-    $findMeTemplate.insertBefore(insertSelector);
-});
+/*global $*/
+(function($){
+  $(document).ready(function () {
+      var $findMeTemplate = $($('#find-me-template').html());
+      var insertSelector = $('#cust-student-alert');
+      $findMeTemplate.insertBefore(insertSelector);
+  });
+})($j);
