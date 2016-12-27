@@ -4,4 +4,15 @@
     </a>
 </script>
 
-<script src="/scripts/find-me/admin-findme.js"></script>
+<script src=""></script>
+<script>
+  require.config({
+    paths: {
+      'findme': '/scripts/find-me/admin-findme'
+    }
+  });
+
+  require(['findme'], (findme) => {
+    findme.default();
+  });
+</script>
